@@ -24,7 +24,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  great_list_view: 
+  better_list_view: 
     path: ../.
 
   # The following adds the Cupertino Icons font to your application.

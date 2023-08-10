@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "great_list_view",
+            "name": "better_list_view",
             "request": "launch",
             "type": "dart",
             "program": "_example/lib/main.dart",

@@ -4,11 +4,11 @@ import 'dart:math' as math;
 
 import 'package:diffutil_dart/diffutil.dart';
 import 'package:flutter/widgets.dart';
-import 'package:great_list_view/great_list_view.dart'
+import 'package:better_list_view/better_list_view.dart'
     show AnimatedListController, AnimatedWidgetBuilderData;
 import 'package:worker_manager/worker_manager.dart';
 
-part 'package:great_list_view/src/moved_array.dart';
+part 'package:better_list_view/src/moved_array.dart';
 
 const int kSpawnNewIsolateCount = 500;
 
