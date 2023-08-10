@@ -41,6 +41,7 @@ class _BodyState extends State<Body> {
 
   void swapList() {
     setState(() {
+      // currentList.swap(0, 1);
       if (currentList == listA) {
         currentList = listB;
       } else {
@@ -51,22 +52,23 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    return Scrollbar(
-      child: AutomaticAnimatedListView<ItemData>(
-        list: currentList,
-        comparator: AnimatedListDiffListComparator<ItemData>(
-            sameItem: (a, b) => a.id == b.id,
-            sameContent: (a, b) =>
-                a.color == b.color && a.fixedHeight == b.fixedHeight),
-        itemBuilder: (context, item, data) => data.measuring
+    return AutomaticAnimatedListView<ItemData>(
+      list: currentList,
+      comparator: AnimatedListDiffListComparator<ItemData>(
+          sameItem: (a, b) => a.id == b.id,
+          sameContent: (a, b) =>
+              a.color == b.color && a.fixedHeight == b.fixedHeight),
+      itemBuilder: (context, index, data) {
+        print(index);
+        var item = currentList[index];
+        return data.measuring
             ? Container(
                 margin: EdgeInsets.all(5), height: item.fixedHeight ?? 60)
-            : Item(data: item),
-        listController: controller,
-        addLongPressReorderable: true,
-        reorderModel: AutomaticAnimatedListReorderModel(currentList),
-        detectMoves: true,
-      ),
+            : Item(data: item);
+      },
+      listController: controller,
+      addLongPressReorderable: true,
+      detectMoves: true,
     );
   }
 }
@@ -103,6 +105,23 @@ class ItemData {
   const ItemData(this.id, [this.color = Colors.blue, this.fixedHeight]);
 }
 
+// List<ItemData> listA = [
+//   ItemData(1, Colors.orange),
+//   ItemData(2),
+//   ItemData(3),
+//   ItemData(4, Colors.cyan),
+//   ItemData(5),
+//   ItemData(8, Colors.green)
+// ];
+// List<ItemData> listB = [
+//   ItemData(4, Colors.cyan),
+//   ItemData(2),
+//   ItemData(6),
+//   ItemData(5, Colors.pink, 100),
+//   ItemData(7),
+//   ItemData(8, Colors.yellowAccent),
+// ];
+
 List<ItemData> listA = [
   ItemData(1, Colors.orange),
   ItemData(2),
@@ -112,13 +131,21 @@ List<ItemData> listA = [
   ItemData(8, Colors.green)
 ];
 List<ItemData> listB = [
-  ItemData(4, Colors.cyan),
+  ItemData(1, Colors.orange),
   ItemData(2),
-  ItemData(6),
-  ItemData(5, Colors.pink, 100),
-  ItemData(7),
-  ItemData(8, Colors.yellowAccent),
+  ItemData(3),
+  ItemData(5),
+  ItemData(4, Colors.cyan),
+  ItemData(8, Colors.green)
 ];
 
 final controller = AnimatedListController();
 final gkey = GlobalKey<_BodyState>();
+
+extension SwappableList<E> on List<E> {
+  void swap(int first, int second) {
+    final temp = this[first];
+    this[first] = this[second];
+    this[second] = temp;
+  }
+}

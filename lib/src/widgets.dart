@@ -292,7 +292,7 @@ class AutomaticAnimatedListView<T> extends AnimatedListView {
           listController: listController,
           delegate: AnimatedSliverChildBuilderDelegate(
             (context, index, data) {
-              return itemBuilder(context, list[index], data);
+              return itemBuilder(context, index, data);
             },
             list.length,
             addAutomaticKeepAlives: addAutomaticKeepAlives,
@@ -312,7 +312,8 @@ class AutomaticAnimatedListView<T> extends AnimatedListView {
           ),
         );
 
-  final AnimatedListDiffListBuilder<T> itemBuilder;
+  // final AnimatedListDiffListBuilder<T> itemBuilder;
+  final AnimatedListDiffListIndexedBuilder itemBuilder;
 
   final AnimatedListDiffListBaseComparator<T> comparator;
 
@@ -345,7 +346,8 @@ class _DiffDispatcherWidget<T> extends StatefulWidget {
       : super(key: key);
 
   final AnimatedListController controller;
-  final AnimatedListDiffListBuilder<T> itemBuilder;
+  // final AnimatedListDiffListBuilder<T> itemBuilder;
+  final AnimatedListDiffListIndexedBuilder itemBuilder;
   final AnimatedListDiffListBaseComparator<T> comparator;
   final List<T> list;
   final Widget child;
